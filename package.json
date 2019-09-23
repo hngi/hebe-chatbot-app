@@ -1,0 +1,16 @@
+{
+  "name": "hebe-slackbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": "https://github.com/hngi/hebe-slackbot.git",
+  "author": "minlinx <minaproblemsolver@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/bolt": "^1.2.0",
+    "dotenv": "^8.1.0"
+  }
+}
