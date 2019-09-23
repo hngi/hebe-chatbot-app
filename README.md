@@ -1,5 +1,5 @@
 # hebe-chatbot-app
-``A simple chat bot that interacts with users
+`A simple chat bot that interacts with users
 ## Tasks
  1. User opens app
  2. User is welcomed
