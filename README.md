@@ -1,8 +1,7 @@
 # hebe-chatbot-app
-`A simple chat bot that interacts with users
+ A slack bot that can be used to save conversation in an external drive
 ## Tasks
- 1. User opens app
- 2. User is welcomed
- 3. User is asked for their name
- 4. bot interacts with user based on the name
-    (You have freedom of other interactions
+1. User sign up (on external drive)
+2. User link external drive with slack workspace
+3. User send conversation to external drive from slack workspace
+user login to the external drive to see their slack conversations
