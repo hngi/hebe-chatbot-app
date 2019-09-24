@@ -32,9 +32,10 @@ app.message('Hello', ({ message, say }) => {
                 "type": "plain_text",
                 "text": "Select a conversation",
                 "emoji": true
-              }
-            },
-            {
+              },
+              "action_id": "conversations_select",
+            }
+            /*{
               "type": "channels_select",
               "placeholder": {
                 "type": "plain_text",
@@ -49,7 +50,7 @@ app.message('Hello', ({ message, say }) => {
                 "text": "Select a user",
                 "emoji": true
               }
-            }
+            }*/
           ]
         }
       ]
