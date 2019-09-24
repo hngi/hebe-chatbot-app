@@ -10,12 +10,11 @@ const app = new App({
 });
 
 
-app.message(':wave:', ({ message, say }) => {  
+app.message('Hello', ({ message, say }) => {  
   // We(HEBE) are going to use a Postgres database here
   // And remove the store.js file.
   let user = store.getUser(message.user);
   
-  if(!user) {
     user = {
       user: message.user,
       channel: message.channel
@@ -25,11 +24,6 @@ app.message(':wave:', ({ message, say }) => {
     say({
       blocks: [
       {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": `Hey there <@${message.user}>!`
-        },
           "type": "actions",
           "elements": [
             {
@@ -60,46 +54,6 @@ app.message(':wave:', ({ message, say }) => {
         }
       ]
     });
-  } else {
-    say({
-      blocks: [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": `Hi again <@${message.user}>!`
-        },
-        "type": "actions",
-		"elements": [
-			{
-				"type": "conversations_select",
-				"placeholder": {
-					"type": "plain_text",
-					"text": "Select a conversation",
-					"emoji": true
-				}
-			},
-			{
-				"type": "channels_select",
-				"placeholder": {
-					"type": "plain_text",
-					"text": "Select a channel",
-					"emoji": true
-				}
-			},
-			{
-				"type": "users_select",
-				"placeholder": {
-					"type": "plain_text",
-					"text": "Select a user",
-					"emoji": true
-				}
-			}
-    ]
-  }
-]
-    });
-  }
     console.log(message.user);
   });
 
