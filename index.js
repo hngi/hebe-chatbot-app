@@ -3,28 +3,77 @@ const dotenv = require('dotenv');
 const store = require('./store');
 
 dotenv.config();
+
 const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
   token: process.env.SLACK_BOT_TOKEN
 });
 
 
-app.event('app_home_opened', ({ event, say }) => {  
+app.message(':wave:', ({ message, say }) => {  
   // We(HEBE) are going to use a Postgres database here
   // And remove the store.js file.
-  let user = store.getUser(event.user);
+  let user = store.getUser(message.user);
   
   if(!user) {
     user = {
-      user: event.user,
-      channel: event.channel
+      user: message.user,
+      channel: message.channel
     };
     store.addUser(user);
     
-    say(`Hello world, and welcome <@${event.user}>!`);
+    say({
+      blocks: [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": `Hey there <@${message.user}>!`
+        },
+        "accessory": {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Click Me"
+          },
+          "action_id": "button_click"
+        }
+       }
+      ]
+    });
   } else {
-    say('Hi again!');
+    say({
+      blocks: [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": `Hi again <@${message.user}>!`
+        },
+        "accessory": {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Click Me"
+          },
+          "action_id": "button_click"
+        }
+       }
+      ]
+    });
   }
+    console.log(message.user);
+  });
+
+app.action('button_click', ({ body, ack, say }) => {
+    // Acknowledge the action
+    ack();
+    say(`<@${body.user.id}> clicked the button`);
+});
+
+app.error((error) => {
+	// Check the details of the error to handle cases where you should retry sending a message or stop the app
+	console.error(error);
 });
 
 
