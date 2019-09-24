@@ -30,15 +30,34 @@ app.message(':wave:', ({ message, say }) => {
           "type": "mrkdwn",
           "text": `Hey there <@${message.user}>!`
         },
-        "accessory": {
-          "type": "button",
-          "text": {
-            "type": "plain_text",
-            "text": "Click Me"
-          },
-          "action_id": "button_click"
+          "type": "actions",
+          "elements": [
+            {
+              "type": "conversations_select",
+              "placeholder": {
+                "type": "plain_text",
+                "text": "Select a conversation",
+                "emoji": true
+              }
+            },
+            {
+              "type": "channels_select",
+              "placeholder": {
+                "type": "plain_text",
+                "text": "Select a channel",
+                "emoji": true
+              }
+            },
+            {
+              "type": "users_select",
+              "placeholder": {
+                "type": "plain_text",
+                "text": "Select a user",
+                "emoji": true
+              }
+            }
+          ]
         }
-       }
       ]
     });
   } else {
@@ -50,22 +69,41 @@ app.message(':wave:', ({ message, say }) => {
           "type": "mrkdwn",
           "text": `Hi again <@${message.user}>!`
         },
-        "accessory": {
-          "type": "button",
-          "text": {
-            "type": "plain_text",
-            "text": "Click Me"
-          },
-          "action_id": "button_click"
-        }
-       }
-      ]
+        "type": "actions",
+		"elements": [
+			{
+				"type": "conversations_select",
+				"placeholder": {
+					"type": "plain_text",
+					"text": "Select a conversation",
+					"emoji": true
+				}
+			},
+			{
+				"type": "channels_select",
+				"placeholder": {
+					"type": "plain_text",
+					"text": "Select a channel",
+					"emoji": true
+				}
+			},
+			{
+				"type": "users_select",
+				"placeholder": {
+					"type": "plain_text",
+					"text": "Select a user",
+					"emoji": true
+				}
+			}
+    ]
+  }
+]
     });
   }
     console.log(message.user);
   });
 
-app.action('button_click', ({ body, ack, say }) => {
+app.action('conversations_select', ({ body, ack, say }) => {
     // Acknowledge the action
     ack();
     say(`<@${body.user.id}> clicked the button`);
